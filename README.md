@@ -21,4 +21,4 @@ ASP.NET 학습 리포지토리
 	- Bootstrap 예제클로닝
 	- 핀터레스트스타일페이지 클로닝
 
-<img src="" width="700">
+<img src="https://github.com/Tarel-Github/pknu_aspnet_2023/blob/main/images/aspnet01.gif?raw=true" width="700">
