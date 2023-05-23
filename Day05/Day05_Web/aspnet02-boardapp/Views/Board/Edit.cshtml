@@ -1,13 +1,13 @@
 ﻿@model aspnet02_boardapp.Models.Board
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-8">
-            <h4 class="text-primary">게시판 글쓰기</h4>
+            <h4 class="text-primary">게시판 글수정</h4>
         </div>
         <div class="col-4 text-end">
         </div>
@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="UserId" class="control-label"></label>
@@ -53,9 +53,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
