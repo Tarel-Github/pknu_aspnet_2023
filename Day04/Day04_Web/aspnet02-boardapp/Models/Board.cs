@@ -7,7 +7,7 @@ namespace aspnet02_boardapp.Models
     {
         [Key]   // PK
         public int Id { get; set; }
-        [Required(ErrorMessage = "아이디를 입력하세요"))]  // Not Null
+        [Required(ErrorMessage = "아이디를 입력하세요")]  // Not Null
         public string UserId { get; set; }
         public string? UserName { get; set; }   // 물음표 붙여서 Null 허용
         [Required(ErrorMessage ="제목을 입력하세요")]  // Not Null
