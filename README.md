@@ -39,3 +39,9 @@ ASP.NET Core MVC 게시판
 	- 게시판 페이징까지
 
 <img src="https://github.com/Tarel-Github/pknu_aspnet_2023/blob/main/images/aspnet04.gif?raw=true" width="700">
+
+## 6일차
+- ASP.NET MVC
+	- 게시판 정리
+	- 계정관리 추가
+<img src="https://github.com/Tarel-Github/pknu_aspnet_2023/blob/main/images/aspnet05.gif?raw=true" width="700">
