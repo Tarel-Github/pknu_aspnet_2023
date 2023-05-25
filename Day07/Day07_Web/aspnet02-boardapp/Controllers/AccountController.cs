@@ -1,7 +1,9 @@
 ﻿using aspnet02_boardapp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 
 namespace aspnet02_boardapp.Controllers
 {
@@ -12,13 +14,12 @@ namespace aspnet02_boardapp.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            // 생성자 마법사(Alt Enter)로 만들기
+        {   // 생성자 마법사로 만드세요.
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         }
 
-        // https:localhost:7125/Account/Register//
+        // https://localhost:7125/Account/Register
         [HttpGet]
         public IActionResult Register()
         {
@@ -32,29 +33,29 @@ namespace aspnet02_boardapp.Controllers
         // 비동기가 되면 Task<IActionResult>
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            ModelState.Remove("PhoneNumber");
+            ModelState.Remove("PhoneNumber"); // PhoneNumber는 입력값 검증에서 제거
 
-            if(ModelState.IsValid)  // 데이터를 제대로 입력해서 검증 성공하면
+            if (ModelState.IsValid) // 데이터를 제대로 입력해서 검증 성공하면
             {
-                // ASP.NET user - aspnetusers 테이블에 데이터 넣기 위해서
+                // ASP.NET user - aspnetusers 테이블에 데이터넣기 위해서 
                 // 매핑되는 인스턴스를 생성
-                var user = new IdentityUser
+                var user = new IdentityUser()
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    PhoneNumber = model.PhoneNumber ,// 핸드폰 번호 추가
+                    PhoneNumber = model.PhoneNumber // 핸드폰 번호 추가
                 };
-
 
                 // aspnetusers 테이블에 사용자 데이터를 대입
                 var result = await _userManager.CreateAsync(user, model.Password);
-                
-                if(result.Succeeded)
+
+                if (result.Succeeded)
                 {
-                    // 회원가입을 성공했으면 로그인한 뒤 localhost:7125/Home/Index로 가라
+                    // 회원가입을 성공했으면 로그인한 뒤 localhost:7125/Home/Index 로 가라
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    TempData["succeed"] = "새 게시글이 저장되었습니다.";     // 성공메시지
-                    return RedirectToAction("index", "Home");
+                    // TODO : 회원가입 후 토스트메시지 띄우기
+                    TempData["succeed"] = "회원가입 성공했습니다."; // 성공메세지
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach (var error in result.Errors)
@@ -62,44 +63,45 @@ namespace aspnet02_boardapp.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            return View(model);
+            return View(model); // 회원가입을 실패하면 그화면 그대로 유지
         }
 
         [HttpGet]
-        public IActionResult Login() 
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (ModelState.IsValid)
             {
-                // 파라미터 순서: 아이디, 패스워드, IsPersistent = RememberMe, 실패시 계정 잠그기
+                // 파라미터 순서 : 아이디, 패스워드, isPersistent = RememeberMe, 실패할때 계정 잠그기
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
-                    TempData["succeed"] = "로그인 했습니다.";     // 성공메시지
-
+                    // TODO : 로그인 후 토스트메시지 띄우기
+                    TempData["succeed"] = "로그인했습니다."; // 성공메세지
                     return RedirectToAction("Index", "Home");
                 }
-
-                ModelState.AddModelError("", "로그인 실패!");
+                else
+                {
+                    ModelState.AddModelError("", "로그인 실패!");
+                }
             }
 
-            return View(model);     //입력 검증이 실패하면 화면에 그대로 대기
-
+            return View(model); // 입력검증이 실패하면 화면에 그대로 대기
         }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            TempData["succeed"] = "로그아웃 했습니다.";     // 성공메시지
-
+            // TODO : 로그아웃 후 토스트메시지 띄우기
+            TempData["succeed"] = "로그아웃했습니다."; // 성공메세지
             return RedirectToAction("Index", "Home");
         }
 
@@ -109,8 +111,8 @@ namespace aspnet02_boardapp.Controllers
             Debug.WriteLine(userName);
 
             var curUser = await _userManager.FindByNameAsync(userName);
-            
-            if (curUser != null)
+
+            if (curUser == null)
             {
                 TempData["error"] = "사용자가 없습니다.";
                 return RedirectToAction("Index", "Home");
@@ -125,24 +127,23 @@ namespace aspnet02_boardapp.Controllers
             return View(model);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Profile(RegisterModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByNameAsync(model.Email);
 
                 user.PhoneNumber = model.PhoneNumber;
                 user.Email = model.Email;
-                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password); // 비밀번호 변경은 어렵다.
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password); // 비밀번호 변경은 어렵다!!
                 var result = await _userManager.UpdateAsync(user);
 
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    TempData["succeed"] = "프로필 변경 성공 했습니다.";
-                    return RedirectToAction("index", "Home");
+                    TempData["succeed"] = "프로필변경 성공했습니다.";
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach (var error in result.Errors)
@@ -150,8 +151,7 @@ namespace aspnet02_boardapp.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            return View(model); // 프로필 변경 실패시 화면 유지
+            return View(model); // 프로필변경 실패하면 화면유지.
         }
-
     }
 }

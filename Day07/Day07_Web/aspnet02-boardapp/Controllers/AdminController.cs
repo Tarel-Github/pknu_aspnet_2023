@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace aspnet02_boardapp.Controllers
 {
-
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -27,39 +26,40 @@ namespace aspnet02_boardapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRole(CreateRoleModel model)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 IdentityRole role = new IdentityRole()
                 {
                     Name = model.RoleName
                 };
-                var result = await _roleManager.CreateAsync(role);
+                var result = await _roleManager.CreateAsync(role); // 지정한 권한명이 aspnetroles에 저장
 
                 if (result.Succeeded)
                 {
-                    // todo 토스트 메시지 추가
+                    // TODO : 토스트메시지 추가
                     return RedirectToAction("ListRoles", "Admin");
                 }
-                foreach (var error in result.Errors) 
+
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
-                
-            return View(model);
 
-                
+            return View(model);
         }
+
         [HttpGet]
         public IActionResult ListRoles()
         {
             var roles = _roleManager.Roles;
             return View(roles);
         }
+
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            var role = await _roleManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByIdAsync(id); // aspnetroles 테이블에서 id 조회
             if (role == null)
             {
                 TempData["error"] = $"권한이 없습니다.";
@@ -72,22 +72,23 @@ namespace aspnet02_boardapp.Controllers
                 RoleName = role.Name
             };
 
-            var userList = await _userManager.Users.ToListAsync();
-            
-            foreach(var user in userList)
+            var userList = await _userManager.Users.ToListAsync(); // 사용자리스트
+
+            foreach (var user in userList)
             {
                 if (await _userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
             }
-            return View(model);
 
+            return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleModel model)
         {
-            var role = await _roleManager.FindByIdAsync(model.Id);
+            var role = await _roleManager.FindByIdAsync(model.Id); // aspnetroles 테이블에서 id 조회
             if (role == null)
             {
                 TempData["error"] = $"권한이 없습니다.";
@@ -100,17 +101,18 @@ namespace aspnet02_boardapp.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ListRole", "Admin");
+                    return RedirectToAction("ListRoles", "Admin");
                 }
 
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
 
-                return View(model) ;
+                return View(model);
             }
         }
+
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
@@ -120,12 +122,11 @@ namespace aspnet02_boardapp.Controllers
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"권한이 없습니다.";
+                TempData["error"] = $"권한이 없습니다.";
                 return NotFound();
             }
 
             var model = new List<UserRoleModel>();
-
             var userList = await _userManager.Users.ToListAsync();
 
             foreach (var user in userList)
@@ -151,10 +152,6 @@ namespace aspnet02_boardapp.Controllers
             return View(model);
         }
 
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleModel> model, string roleId)
         {
@@ -164,7 +161,7 @@ namespace aspnet02_boardapp.Controllers
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                TempData["error"] = $"권한이 없습니다.";
                 return NotFound();
             }
 
@@ -180,25 +177,11 @@ namespace aspnet02_boardapp.Controllers
                 }
                 else if (!user.IsSelected && await _userManager.IsInRoleAsync(userObj, role.Name))
                 {
-                    result = await _userManager.RemoveFromRoleAsync(userObj, role.Name);    // 사용자를 권한에서 삭제
+                    result = await _userManager.RemoveFromRoleAsync(userObj, role.Name); // 사용자를 권한에서 삭제
                 }
             }
 
             return RedirectToAction("EditRole", new { Id = roleId });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
