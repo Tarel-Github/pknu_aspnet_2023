@@ -45,3 +45,24 @@ ASP.NET Core MVC 게시판
 	- 게시판 정리
 	- 계정관리 추가
 <img src="https://github.com/Tarel-Github/pknu_aspnet_2023/blob/main/images/aspnet05.gif?raw=true" width="700">
+
+## 7일차
+- ASP.NET Core MVC
+	- 게시판 정리
+		- 아이디 삭제
+		- 게시판 번호
+	- 계정 및 권한관리
+		- 사용자별 권한할당
+		- 관리자, 사용자 분리
+		- 관리자 게시판글 모두 삭제가능
+		- 프로필 수정
+		
+## 8일차
+- ASP.NET Core MVC
+	- 부트스트랩 테마(SEO Dream) 적용
+	
+	
+- ASP.NET RestAPI(jQuery, WPF)
+- 개인포트폴리오
+	- 부트스트랩 테마 재적용
+	
