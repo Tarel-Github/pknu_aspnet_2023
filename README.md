@@ -66,3 +66,18 @@ ASP.NET Core MVC 게시판
 - 개인포트폴리오
 	- 부트스트랩 테마 재적용
 	
+<img src="https://github.com/Tarel-Github/pknu_aspnet_2023/blob/main/images/aspnet06.gif?raw=true" width="700">	
+
+## 9일차
+- ASP.NET Core MVC
+	- SEO Dream 테마 완료
+- ASP.NET RestAPI
+	- RestAPI Server
+	- WPF Cilent
+
+## 10일차
+- ASP.NET RestAPI
+	- RestAPI Server
+	- WPF Cilent
+- 개인포트폴리오
+	- 부트스트랩 테마 재적용
