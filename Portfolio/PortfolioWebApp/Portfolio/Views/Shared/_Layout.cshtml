@@ -1,6 +1,9 @@
 ﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- 탬플릿 주소 -->
+    <!-- https://themewagon.com/themes/corona-free-responsive-bootstrap-4-admin-dashboard-template -->
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -10,12 +13,21 @@
     <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Bootstrap 5 CDN -->
-    <link rel="stylesheet" href="~/themes/boot/vendor/bootstrap/css/bootstrap.min.css" />
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="~/themes/boot/css/styles.css">
-@*    <link rel="stylesheet" href="~/themes/boot/assets/css/templatemo-seo-dream.css">
-    <link rel="stylesheet" href="~/themes/boot/assets/css/animated.css">
-    <link rel="stylesheet" href="~/themes/boot/assets/css/owl.css">*@
+    <link rel="stylesheet" href="~/themes/corona/template/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/themes/corona/template/assets/vendors/css/vendor.bundle.base.css">
+
+    <link rel="stylesheet" href="~/themes/corona/template/assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="~/themes/corona/template/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/themes/corona/template/assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/themes/corona/template/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="~/themes/corona/template/assets/css/style.css">
+    <link rel="shortcut icon" href="~/themes/corona/template/assets/images/favicon.png">
+    
+@*    <style type="text/css">/* Chart.js */
+        @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+    </style>*@
+
     <!-- 우리사이트용 추가 CSS -->
     <!-- WYSWYG 에디터 링크 -->
     <link rel="stylesheet" href="~/lib/trumbowyg/ui/trumbowyg.min.css" />
@@ -30,161 +42,460 @@
 </head>
 
 <body>
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="">포트폴리오</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <i class="fas fa-bars"></i> Font Awesome fontawesome.com --></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch">
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fas fa-search"></i> Font Awesome fontawesome.com --></button>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-
-                    @if (signInManager.IsSignedIn(User))
-                    {
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg class="svg-inline--fa fa-user fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                <path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z">
-                                </path>
-                            </svg><!-- <i class="fas fa-user fa-fw"></i> Font Awesome fontawesome.com -->
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">설정</a></li>
-                            <li><a class="dropdown-item" href="#!">활동기록</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#!">로그아웃</a></li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" style="color: white; background-color: lightblue; border-radius: 5px;">로그인</a>
-                    }
-
+    <div class="container-scroller">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <!-- 좌측 최상단, CORONA, 이건 이미지임 -->
+            <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+                <a class="sidebar-brand brand-logo" href=""><img src="~/themes/corona/template/assets/images/logo.svg" alt="logo"></a>
+                <a class="sidebar-brand brand-logo-mini" href=""><img src="~/themes/corona/template/assets/images/logo-mini.svg" alt="logo"></a>
+            </div>
+            <ul class="nav">
+                <!-- 좌측 상단 프로필 -->
+                <li class="nav-item profile">
+                    <div class="profile-desc">
+                        <div class="profile-pic">
+                            <div class="count-indicator">
+                                <img class="img-xs rounded-circle " src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="">
+                                <span class="count bg-success"></span>
+                            </div>
+                            <div class="profile-name">
+                                <h5 class="mb-0 font-weight-normal">Tarel - 손민성</h5>
+                                <span>관리자</span>
+                            </div>
+                        </div>
+                        <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                            <a href="#" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-settings text-primary"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">계정설정</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-onepassword  text-info"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">비밀번호 변경</p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-calendar-today text-success"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject ellipsis mb-1 text-small">할 일 리스트</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </li>
+
+                <!-- 좌측 네비게이터 -->
+                <li class="nav-item nav-category">
+                    <span class="nav-link">Navigation</span>
+                </li>
+
+                <!-- 좌측 메뉴 0.8, 최초 옵션은 Dashboard-->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Announcement">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-alert-circle-outline"></i>
+                        </span>
+                        <span class="menu-title">공지사항</span>
+                    </a>
+                </li>
+
+                <!-- 좌측 메뉴 1, 최초 옵션은 Dashboard-->
+                @*<li class="nav-item menu-items active">*@
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-view-dashboard"></i>
+                        </span>
+                        <span class="menu-title">대시보드(일반)</span>
+                    </a>
+                </li>
+
+                <!-- 좌측 메뉴 1-2, 관리자용 대시보드-->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="ManagerDashBoard">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-speedometer"></i>
+                        </span>
+                        <span class="menu-title">대시보드(관리자)</span>
+                    </a>
+                </li>
+
+                <!-- 좌측 메뉴 2, 추가 하단 옵션 있음, 최초 옵션은 Basic UI Elements -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-document"></i>
+                        </span>
+                        <span class="menu-title">포트폴리오</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <!-- 좌측 메뉴 중 하단 메뉴 리스트 -->
+                            <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Portfolio_01">웹</a></li>
+                            <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Portfolio_02">앱</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- 좌측 메뉴 3, 최초 옵션은 Form Elements -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Study">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-book-open-page-variant"></i>
+                        </span>
+                        <span class="menu-title">스터디</span>
+                    </a>
+                </li>
+
+                <!-- 좌측 메뉴 4, 최초 옵션은 Tables -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Service">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-heart-pulse"></i>
+                        </span>
+                        <span class="menu-title">서비스</span>
+                    </a>
+                </li>
+
+                <!-- 좌측 메뉴 5, 최초 옵션은 Charts -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-account-card-details"></i>
+                        </span>
+                        <span class="menu-title">컨텍트</span>
+                    </a>
+                </li>
+                @*
+                <!-- 좌측 메뉴 6, 최초 옵션은 Icons -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="pages/icons/mdi.html">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-contacts"></i>
+                        </span>
+                        <span class="menu-title">아이콘</span>
+                    </a>
+                </li>
+
+                <!-- 좌측 메뉴 7, 추가 하단 옵션 있음, 최초 옵션은 User Pages -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-security"></i>
+                        </span>
+                        <span class="menu-title">유저 페이지</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <!-- 7번 메뉴의 추가 하단 옵션, 최초옵션은 순서대로 빈페이지, 404페이지, 500페이지, 로그인 페이지, 회원가입 페이지-->
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> 빈페이지 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
+                            <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"> 로그인 </a></li>
+                            <li class="nav-item"> <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register"> 회원가입 </a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- 좌측 메뉴 8, 최초 옵션은 Documentation, 최초에 이것은 링크를 걸어 설명서 역할을 했음 -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-file-document-box"></i>
+                        </span>
+                        <span class="menu-title">문서</span>
+                    </a>
+                </li>*@
             </ul>
         </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">포트폴리오</div>
-                            <a class="nav-link" href="Index.html">
-                                <div class="sb-nav-link-icon"><svg class="svg-inline--fa fa-gauge-high" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gauge-high" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-17.4-6.9-33.1-18.1-44.6L366 161.7c5.3-12.1-.2-26.3-12.3-31.6s-26.3 .2-31.6 12.3L257.9 288c-.6 0-1.3 0-1.9 0c-35.3 0-64 28.7-64 64s28.7 64 64 64zM176 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM96 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm352-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg><!-- <i class="fas fa-tachometer-alt"></i> Font Awesome fontawesome.com --></div>
-                                포트폴리오 1
-                            </a>
-                            <div class="sb-sidenav-menu-heading">스킬</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon">
-                                    <svg class="svg-inline--fa fa-table-columns" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table-columns" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
-                                        @*<path fill="currentColor" d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zm64 64V416H224V160H64zm384 0H288V416H448V160z"></path>*@
-                                    </svg><!-- <i class="fas fa-columns"></i> Font Awesome fontawesome.com -->
-                                </div>
-                                레이아웃
-                                <div class="sb-sidenav-collapse-arrow">
-                                    <svg class="svg-inline--fa fa-angle-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                        @*<path fill="currentColor" d="M169.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 274.7 54.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>*@
-                                    </svg><!-- <i class="fas fa-angle-down"></i> Font Awesome fontawesome.com -->
-                                </div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">스테틱 네비게이션</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">라이트 사이드 네비</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><svg class="svg-inline--fa fa-book-open" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="book-open" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"></path></svg><!-- <i class="fas fa-book-open"></i> Font Awesome fontawesome.com --></div>
-                                페이지
-                                <div class="sb-sidenav-collapse-arrow"><svg class="svg-inline--fa fa-angle-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M169.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 274.7 54.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg><!-- <i class="fas fa-angle-down"></i> Font Awesome fontawesome.com --></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        인증
-                                        <div class="sb-sidenav-collapse-arrow"><svg class="svg-inline--fa fa-angle-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M169.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 274.7 54.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg><!-- <i class="fas fa-angle-down"></i> Font Awesome fontawesome.com --></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
+
+        <!-- 상단 메뉴 -->
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_navbar.html -->
+            <nav class="navbar p-0 fixed-top d-flex flex-row">
+                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/themes/corona/template/assets/images/logo-mini.svg" alt="logo"></a>
+                </div>
+                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="mdi mdi-menu"></span>
+                    </button>
+                    <!-- 검색 메뉴(버튼은 없나?) -->
+                    @*<ul class="navbar-nav w-100">
+                        <li class="nav-item w-100">
+                            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                                <input type="text" class="form-control" placeholder="검색">
+                            </form>
+                        </li>
+                    </ul>*@
+                    <!-- 우측 상단 메뉴 -->
+                    <ul class="navbar-nav navbar-nav-right">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                        <!-- 상단의 프로젝트 생성 버튼, 하단 메뉴 있음 -->
+                        <li class="nav-item dropdown d-none d-lg-block">
+                            <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ 새로운 프로젝트 추가</a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
+                                <h6 class="p-3 mb-0">프로젝트</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-file-outline text-primary"></i>
+                                        </div>
                                     </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        에러
-                                        <div class="sb-sidenav-collapse-arrow"><svg class="svg-inline--fa fa-angle-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M169.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 274.7 54.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg><!-- <i class="fas fa-angle-down"></i> Font Awesome fontawesome.com --></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">소프트웨어 개발</p>
                                     </div>
-                                </nav>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-web text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">UI 개발</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-layers text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">소프트웨어 점검</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">최하단 멘트</p>
                             </div>
-                            <div class="sb-sidenav-menu-heading">에드온</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><svg class="svg-inline--fa fa-chart-area" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-area" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm96 288H448c17.7 0 32-14.3 32-32V251.8c0-7.6-2.7-15-7.7-20.8l-65.8-76.8c-12.1-14.2-33.7-15-46.9-1.8l-21 21c-10 10-26.4 9.2-35.4-1.6l-39.2-47c-12.6-15.1-35.7-15.4-48.7-.6L135.9 215c-5.1 5.8-7.9 13.3-7.9 21.1v84c0 17.7 14.3 32 32 32z"></path></svg><!-- <i class="fas fa-chart-area"></i> Font Awesome fontawesome.com --></div>
-                                차트
+                        </li>
+                        <!-- 상단 오른쪽 박스 4개 짜리 아이콘 (용도 불명) -->
+                        <li class="nav-item nav-settings d-none d-lg-block">
+                            <a class="nav-link" href="#">
+                                <i class="mdi mdi-view-grid"></i>
                             </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><svg class="svg-inline--fa fa-table" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"></path></svg><!-- <i class="fas fa-table"></i> Font Awesome fontawesome.com --></div>
-                                테이블
+                        </li>
+                        <!-- 상단 오른쪽 메시지 -->
+                        <li class="nav-item dropdown border-left">
+                            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-email"></i>
+                                <span class="count bg-success"></span>
                             </a>
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <!-- 메인화면 -->
-                <main>
-                    @RenderBody()
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright © Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                ·
-                                <a href="#">Terms &amp; Conditions</a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                                <h6 class="p-3 mb-0">메시지</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <img src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="image" class="rounded-circle profile-pic">
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">마크가 메시지를 보냄</p>
+                                        <p class="text-muted mb-0"> 1분 전 </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <img src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="image" class="rounded-circle profile-pic">
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">메시지 보냄</p>
+                                        <p class="text-muted mb-0"> 15분 전 </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <img src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="image" class="rounded-circle profile-pic">
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1">프사 업뎃</p>
+                                        <p class="text-muted mb-0"> 18분 전 </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">4개의 새로운 메시지</p>
                             </div>
-                        </div>
+                        </li>
+                        <!-- 상단 오른쪽 알람 -->
+                        <li class="nav-item dropdown border-left">
+                            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                                <i class="mdi mdi-bell"></i>
+                                <span class="count bg-danger"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                                <h6 class="p-3 mb-0">알람</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-calendar text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">오늘 이벤트</p>
+                                        <p class="text-muted ellipsis mb-0"> 오늘 일을 기억하세요 </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">설정</p>
+                                        <p class="text-muted ellipsis mb-0"> 대시보드 업데이트 </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-link-variant text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">관리자 계승?</p>
+                                        <p class="text-muted ellipsis mb-0"> 새로운 관리자 </p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">추가 메뉴라도?</p>
+                            </div>
+                        </li>
+                        <!-- 상단 오른쪽 로그인 정보 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                <div class="navbar-profile">
+                                    <img class="img-xs rounded-circle" src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="">
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Tarel - 손민성</p>
+                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                                @*<h6 class="p-3 mb-0">프로필</h6>*@
+                                @*<div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">설정</p>
+                                    </div>
+                                </a>*@
+                                @*<div class="dropdown-divider"></div>*@
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-logout text-danger"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">로그아웃</p>
+                                    </div>
+                                </a>
+                                @*<div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">그 외 고급 설정</p>*@
+                            </div>
+                        </li>
+                        }
+                        else
+                        {
+                            <form method="post" asp-area="" asp-controller="Account" asp-action="Login" style="margin: 5px;">
+                                <button type="submit" class="btn btn-primary btn-fw">로그인</button>
+                            </form>
+                            <form method="post" asp-area="" asp-controller="Account" asp-action="Register" style="margin: 5px;">
+                                <button type="submit" class="btn btn-primary btn-fw">회원가입</button>
+                            </form>
+                        }
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                        <span class="mdi mdi-format-line-spacing"></span>
+                    </button>
+                </div>
+            </nav>
+            <!-- 여기서부터 중앙에 표시되는 부분-->
+            <!-- partial -->
+            <div class="main-panel">
+                @RenderBody()
+
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                            Copyright © bootstrapdash.com 2020<br>
+
+                            Distributed By <a href="https://www.themewagon.com" target="_blank">ThemeWagon</a>
+
+                        </span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
                     </div>
                 </footer>
+                <!-- partial -->
             </div>
+            <!-- main-panel ends -->
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/themes/corona/template/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="~/themes/corona/template/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/themes/corona/template/assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="~/themes/corona/template/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="~/themes/corona/template/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/themes/corona/template/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/themes/corona/template/assets/js/off-canvas.js"></script>
+    <script src="~/themes/corona/template/assets/js/hoverable-collapse.js"></script>
+    <script src="~/themes/corona/template/assets/js/misc.js"></script>
+    <script src="~/themes/corona/template/assets/js/settings.js"></script>
+    <script src="~/themes/corona/template/assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="~/themes/corona/template/assets/js/dashboard.js"></script>
+    <!-- End custom js for this page -->
 
+    <div class="jvectormap-tip"></div>
+</body>
 
-    </body>
-
+<body>
 
     <!-- ---------------------푸터------------------------- -->
-@*    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Portfolio - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>*@
     <!-- Scripts -->
     <!-- jQuery & Bootstrap CND LINKs -->
     <script src="~/themes/boot/vendor/jquery/jquery.js"></script>
