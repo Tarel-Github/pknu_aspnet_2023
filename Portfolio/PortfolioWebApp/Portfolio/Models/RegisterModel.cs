@@ -12,15 +12,18 @@ namespace Portfolio.Models
         public string Email { get; set; }
 
 
-        [DisplayName("핸드폰 번호")]
-        public string? PhoneNumber { get; set; }
-
+        [Required(ErrorMessage = "닉네임은 필수입니다.")]
+        [DataType(DataType.Text)]
+        [DisplayName("닉네임")]
+        public string Nickname { get; set; }
 
 
         [Required(ErrorMessage = "패스워드는 필수입니다.")]
         [DataType(DataType.Password)]
         [DisplayName("패스워드")]
         public string Password { get; set; }
+
+
         [Required(ErrorMessage = "패스워드 확인은 필수입니다.")]
         [DataType(DataType.Password)]
         [DisplayName("패스워드 확인")]

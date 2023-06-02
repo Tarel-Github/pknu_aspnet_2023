@@ -17,7 +17,6 @@ namespace Portfolio.Controllers
             _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         }
 
-        // https://localhost:7125/Account/Register
         [HttpGet]
         public IActionResult Register()
         {
@@ -33,7 +32,7 @@ namespace Portfolio.Controllers
         // 비동기가 되면 Task<IActionResult>
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            ModelState.Remove("PhoneNumber"); // PhoneNumber는 입력값 검증에서 제거
+            ModelState.Remove("NickName"); // PhoneNumber는 입력값 검증에서 제거
 
             if (ModelState.IsValid) // 데이터를 제대로 입력해서 검증 성공하면
             {
@@ -41,9 +40,8 @@ namespace Portfolio.Controllers
                 // 매핑되는 인스턴스를 생성
                 var user = new IdentityUser()
                 {
-                    UserName = model.Email,
+                    UserName = model.Nickname,
                     Email = model.Email,
-                    PhoneNumber = model.PhoneNumber // 핸드폰 번호 추가
                 };
 
                 // aspnetusers 테이블에 사용자 데이터를 대입
@@ -125,7 +123,7 @@ namespace Portfolio.Controllers
             var model = new RegisterModel()
             {
                 Email = curUser.Email,
-                PhoneNumber = curUser.PhoneNumber,
+                Nickname = curUser.UserName,
             };
 
             return View(model);
@@ -138,7 +136,7 @@ namespace Portfolio.Controllers
             {
                 var user = await _userManager.FindByNameAsync(model.Email);
 
-                user.PhoneNumber = model.PhoneNumber;
+                user.UserName = model.Nickname;
                 user.Email = model.Email;
                 user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password); // 비밀번호 변경은 어렵다!!
                 var result = await _userManager.UpdateAsync(user);
