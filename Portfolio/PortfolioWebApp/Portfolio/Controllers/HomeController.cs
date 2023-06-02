@@ -9,6 +9,11 @@ namespace Portfolio.Controllers
             return View();
         }
 
+        public IActionResult Welcome()
+        {
+            return View();
+        }
+
         public IActionResult ManagerDashBoard()
         {
             return View();

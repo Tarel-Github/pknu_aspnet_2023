@@ -84,3 +84,14 @@ ASP.NET Core MVC 게시판
 
 - 개인포트폴리오
 	- 부트스트랩 테마 재적용
+	
+## 11일차
+- ASP.NET RestAPI
+	- RestAPI Server 체크
+	- FrontEnd Server 작업
+	
+## 12일차
+- ASP.NET RestAPI
+	- RestAPI Server 수정
+	- FrontEnd Server 작업 계속
+	
