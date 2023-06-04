@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace Portfolio.Models
 {
-    public class PortfolioWebModel
+    public class PortfolioAppModel
     {
         [Key]
         public int Id { get; set; }

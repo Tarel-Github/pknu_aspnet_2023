@@ -23,21 +23,22 @@ namespace Portfolio.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public IActionResult Create(StudyModel temp)
         {
-
+            // 이부분 주석 해제해야함
             // TempPortfolioModel -> PortfolioModel 변경
-            var portfolio = new StudyModel()
-            {
-                Title = temp.Title,
-                Url = temp.Url
-            };
+            //var portfolio = new StudyModel()
+            //{
+            //    Title = temp.Title,
+            //    Url = temp.Url
+            //};
 
-            _db.Study.Add(portfolio);
-            _db.SaveChanges();
+            //_db.Study.Add(portfolio);
+            //_db.SaveChanges();
 
-            TempData["succeed"] = "포트폴리오 저장완료!";
+            //TempData["succeed"] = "포트폴리오 저장완료!";
             return RedirectToAction("Index", "Portfolio");
             
         }
