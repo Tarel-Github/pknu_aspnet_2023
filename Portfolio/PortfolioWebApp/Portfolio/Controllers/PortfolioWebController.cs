@@ -32,18 +32,17 @@ namespace Portfolio.Controllers
         [HttpPost]
         public IActionResult Create(PortfolioWebModel temp)
         {
-            var portfolioWebModel = new PortfolioWebModel()
+            var model = new PortfolioWebModel()
             {
                 Title = temp.Title,
                 Url = temp.Url
             };
 
-            _db.Announcement.Add(portfolioWebModel);
+            _db.PortfolioWeb.Add(model);
             _db.SaveChanges();
 
-            TempData["succeed"] = "공지사항 저장완료!";
-
-            return RedirectToAction("Portfolio_1", "Home");
+            TempData["succeed"] = "포트폴리오 저장완료!";
+            return RedirectToAction("Index", "PortfolioWeb");
 
         }
     }

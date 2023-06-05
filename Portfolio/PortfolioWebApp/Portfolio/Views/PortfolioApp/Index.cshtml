@@ -1,7 +1,58 @@
-﻿
+﻿@model IEnumerable<Portfolio.Models.PortfolioAppModel>
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div style="display: flex; justify-content: space-between;">
+    <h1>Portfoilo-App</h1>
+
+    <form method="get" asp-area="" asp-controller="PortfolioApp" asp-action="Create" style="margin: 5px;">
+        <button type="submit" style="width:150px; margin:5px; height:80%" class="btn btn-inverse-primary btn-fw">새 글 추가</button>
+    </form>
+</div>
+
+
+<div class="content-wrapper">
+    <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-xl-4 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- 최상단 제목 -->
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+                            <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel owl-loaded owl-drag" id="owl-carousel-basic">
+                                <div class="owl-stage-outer">
+                                    <!-- 여기에 사진을 올려야 할 듯-->
+                                </div>
+                            </div>
+                            <div class="d-flex py-4">
+                                <div class="preview-list w-100">
+                                    <!-- 중간 부 (프사, 작성자, 코멘트) -->
+                                    <div class="preview-item p-0">
+                                        <div class="preview-thumbnail">
+                                            <img src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" class="rounded-circle" alt="">
+                                        </div>
+                                        <div class="preview-item-content d-flex flex-grow">
+                                            <div class="flex-grow">
+                                                <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                                    <h6 class="preview-subject">작성자</h6>
+                                                    <p class="text-muted text-small">4시간 전</p>
+                                                </div>
+                                                <p class="text-muted">@Html.DisplayFor(modelItem => item.Url)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+    </div>
+</div>
 

@@ -30,12 +30,20 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(StudyModel temp)
+        public IActionResult Create(PortfolioAppModel temp)
         {
-            // 이부분 작성해야함!
+            var model = new PortfolioAppModel()
+            {
+                Title = temp.Title,
+                Url = temp.Url
+            };
 
+            _db.PortfolioApp.Add(model);
+            _db.SaveChanges();
 
-            return RedirectToAction("Index", "Portfolio");
+            TempData["succeed"] = "포트폴리오 저장완료!";
+            return RedirectToAction("Index", "PortfolioApp");
+
         }
     }
 }
