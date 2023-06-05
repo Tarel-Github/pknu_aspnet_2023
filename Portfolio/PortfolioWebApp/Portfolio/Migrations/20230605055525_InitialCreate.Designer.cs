@@ -11,7 +11,7 @@ using Portfolio.Data;
 namespace Portfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230602070935_InitialCreate")]
+    [Migration("20230605055525_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -214,6 +214,25 @@ namespace Portfolio.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Portfolio.Models.AnnouncementModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Announcement");
+                });
+
             modelBuilder.Entity("Portfolio.Models.Board", b =>
                 {
                     b.Property<int>("Id")
@@ -247,6 +266,25 @@ namespace Portfolio.Migrations
                     b.ToTable("Boards");
                 });
 
+            modelBuilder.Entity("Portfolio.Models.PortfolioAppModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioApp");
+                });
+
             modelBuilder.Entity("Portfolio.Models.PortfolioModel", b =>
                 {
                     b.Property<int>("Id")
@@ -274,6 +312,46 @@ namespace Portfolio.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Portfolios");
+                });
+
+            modelBuilder.Entity("Portfolio.Models.PortfolioWebModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PortfolioWeb");
+                });
+
+            modelBuilder.Entity("Portfolio.Models.StudyModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CurrentTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Study");
                 });
 
             modelBuilder.Entity("Portfolio.Models.TempPortfolioModel", b =>

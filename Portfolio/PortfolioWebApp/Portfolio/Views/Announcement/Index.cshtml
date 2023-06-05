@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Portfolio.Models.AnnouncementModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h1> 공지사항 </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <form method="get" asp-area="" asp-controller="Announcement" asp-action="Create">
+                    <button type="submit" style="width:150px; margin:5px; height:80%" class="btn btn-inverse-primary btn-fw">새 글 추가</button>
+                </form>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-md-12 grid-margin">
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+                                <p class="card-description"> 작성자: 관리자 </p>
+
+                                <p> @Html.DisplayFor(modelItem => item.Detail) </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+        <!-- 여기까지 -->
+    </div>
+</div>
+

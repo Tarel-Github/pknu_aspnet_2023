@@ -52,53 +52,68 @@
             <ul class="nav">
                 <!-- 좌측 상단 프로필 -->
                 <li class="nav-item profile">
-                    <div class="profile-desc">
-                        <div class="profile-pic">
-                            <div class="count-indicator">
-                                <img class="img-xs rounded-circle " src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="">
-                                <span class="count bg-success"></span>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div class="profile-desc">
+                            <div class="profile-pic">
+                                <div class="count-indicator">
+                                    <img class="img-xs rounded-circle " src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="">
+                                    <span class="count bg-success"></span>
+                                </div>
+                                <div class="profile-name">
+                                    <h5 class="mb-0 font-weight-normal">@User.Identity.Name</h5>
+                                    <span>사용자</span>
+                                </div>
                             </div>
-                            <div class="profile-name">
-                                <h5 class="mb-0 font-weight-normal">Tarel - 손민성</h5>
-                                <span>관리자</span>
+                            <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">계정설정</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-onepassword  text-info"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">비밀번호 변경</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-calendar-today text-success"></i>
+                                        </div>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject ellipsis mb-1 text-small">할 일 리스트</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                        <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
-                            <a href="#" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-settings text-primary"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">계정설정</p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-onepassword  text-info"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">비밀번호 변경</p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-dark rounded-circle">
-                                        <i class="mdi mdi-calendar-today text-success"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <p class="preview-subject ellipsis mb-1 text-small">할 일 리스트</p>
-                                </div>
-                            </a>
+                    }
+                    else
+                    {
+                        <div style="text-align:center;">
+
+                            <form method="post" asp-area="" asp-controller="Account" asp-action="Login" style="margin: 5px;">
+                                <button type="submit" class="btn btn-primary btn-fw">로그인</button>
+                            </form>
+                            <form method="post" asp-area="" asp-controller="Account" asp-action="Register" style="margin: 5px;">
+                                <button type="submit" class="btn btn-primary btn-fw">회원가입</button>
+                            </form>
                         </div>
-                    </div>
+                    }
                 </li>
 
                 <!-- 좌측 네비게이터 -->
@@ -108,7 +123,7 @@
 
                 <!-- 좌측 메뉴 0.8, 최초 옵션은 Dashboard-->
                 <li class="nav-item menu-items">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Announcement">
+                    <a class="nav-link" asp-area="" asp-controller="Announcement" asp-action="Index">
                         <span class="menu-icon">
                             <i class="mdi mdi-alert-circle-outline"></i>
                         </span>
@@ -157,7 +172,7 @@
                 
                 <!-- 좌측 메뉴 3, 최초 옵션은 Form Elements -->
                 <li class="nav-item menu-items">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Study">
+                    <a class="nav-link" asp-area="" asp-controller="Study" asp-action="Index">
                         <span class="menu-icon">
                             <i class="mdi mdi-book-open-page-variant"></i>
                         </span>
@@ -395,7 +410,7 @@
                             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                                 <div class="navbar-profile">
                                     <img class="img-xs rounded-circle" src="~/themes/corona/template/assets/images/faces/Profile_Default.jpeg" alt="">
-                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Tarel - 손민성</p>
+                                        <p class="mb-0 d-none d-sm-block navbar-profile-name">@User.Identity.Name</p>
                                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                                 </div>
                             </a>
@@ -419,9 +434,12 @@
                                             <i class="mdi mdi-logout text-danger"></i>
                                         </div>
                                     </div>
-                                    <div class="preview-item-content">
-                                        <p class="preview-subject mb-1">로그아웃</p>
-                                    </div>
+
+                                    <form asp-controller="Account" asp-action="Logout" method="post">
+                                        <div class="preview-item-content">
+                                            <button type="submit" class="btn btn-outline-danger btn-fw">로그아웃</button>
+                                        </div>
+                                    </form>
                                 </a>
                                 @*<div class="dropdown-divider"></div>
                                 <p class="p-3 mb-0 text-center">그 외 고급 설정</p>*@

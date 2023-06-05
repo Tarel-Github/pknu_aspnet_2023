@@ -15,6 +15,12 @@ namespace Portfolio.Controllers
             _environment = environment;
         }
 
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var list = _db.PortfolioWeb.ToList(); //SELECT *
+            return View(list);
+        }
 
         // 새 글 작성
         [HttpGet]
@@ -24,11 +30,20 @@ namespace Portfolio.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(StudyModel temp)
+        public IActionResult Create(PortfolioWebModel temp)
         {
-            // 이부분 작성해야함!
+            var portfolioWebModel = new PortfolioWebModel()
+            {
+                Title = temp.Title,
+                Url = temp.Url
+            };
 
-            return RedirectToAction("Index", "Portfolio");
+            _db.Announcement.Add(portfolioWebModel);
+            _db.SaveChanges();
+
+            TempData["succeed"] = "공지사항 저장완료!";
+
+            return RedirectToAction("Portfolio_1", "Home");
 
         }
     }

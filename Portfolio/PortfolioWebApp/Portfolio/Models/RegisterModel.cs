@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Portfolio.Models
 {
-    // 회원가입할 떄 데이터 받는 부분
+    // 회원가입할 때 데이터 받는 부분
     public class RegisterModel
     {
         [Required(ErrorMessage = "이메일은 필수입니다.")]

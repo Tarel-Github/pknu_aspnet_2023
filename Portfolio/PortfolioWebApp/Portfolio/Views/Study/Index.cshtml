@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Portfolio.Models.StudyModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="display: flex; justify-content: space-between;">
+    <h1>Study</h1>
+    <form method="get" asp-area="" asp-controller="Study" asp-action="Create">
+        <button type="submit" style="width:150px; margin:5px; height:80%" class="btn btn-inverse-primary btn-fw">새 글 추가</button>
+    </form>
+</div>
+
+
+<div class="content-wrapper">
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                        <h4 class="card-title mb-1">Study List</h4>
+                        <p class="text-muted mb-1">시간</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="preview-list">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="preview-item border-bottom">
+                                        <div class="preview-thumbnail">
+                                            <div class="preview-icon bg-primary">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                            <div class="flex-grow">
+                                                <h6 class="preview-subject">@Html.DisplayFor(modelItem => item.Title)</h6>
+                                                <p class="text-muted mb-0"> @Html.DisplayFor(modelItem => item.Url)</p>
+                                            </div>
+                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                <p class="text-muted"> @Html.DisplayFor(modelItem => item.CurrentTime)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

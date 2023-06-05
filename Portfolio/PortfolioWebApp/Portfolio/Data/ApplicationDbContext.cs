@@ -16,5 +16,11 @@ namespace Portfolio.Data
 
         // 포트폴리오를 DB로 관리하기 위한 모델
         public DbSet<TempPortfolioModel>? TempPortfolio { get; set; }
+        public DbSet<AnnouncementModel> Announcement { get; set; }
+        public DbSet<PortfolioAppModel> PortfolioApp { get; set; }
+        public DbSet<PortfolioWebModel> PortfolioWeb { get; set; }
+        public DbSet<StudyModel> Study { get; set; }
+
+
     }
 }

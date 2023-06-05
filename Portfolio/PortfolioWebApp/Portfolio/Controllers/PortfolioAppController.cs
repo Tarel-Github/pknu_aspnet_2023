@@ -14,6 +14,14 @@ namespace Portfolio.Controllers
             _db = db;
             _environment = environment;
         }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var list = _db.PortfolioApp.ToList(); //SELECT *
+            return View(list);
+        }
+
         // 새 글 작성
         [HttpGet]
         public IActionResult Create()

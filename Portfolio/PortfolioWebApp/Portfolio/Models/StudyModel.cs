@@ -10,7 +10,7 @@ namespace Portfolio.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "타이틀은 필수입니다.")]
-        [DisplayName("타이틀")]
+        [DisplayName("제목")]
         public string Title { get; set; }
 
 

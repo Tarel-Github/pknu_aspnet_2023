@@ -78,6 +78,7 @@ namespace Portfolio.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.RememberMe = false;// 리멤버미는 거짓으로 설정
                 // 파라미터 순서 : 아이디, 패스워드, isPersistent = RememeberMe, 실패할때 계정 잠그기
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
@@ -100,7 +101,6 @@ namespace Portfolio.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            // TODO : 로그아웃 후 토스트메시지 띄우기
             TempData["succeed"] = "로그아웃했습니다."; // 성공메세지
             return RedirectToAction("Index", "Home");
         }
@@ -156,6 +156,8 @@ namespace Portfolio.Controllers
             return View(model); // 프로필변경 실패하면 화면유지.
         }
     }
+
+
 
 }
 
