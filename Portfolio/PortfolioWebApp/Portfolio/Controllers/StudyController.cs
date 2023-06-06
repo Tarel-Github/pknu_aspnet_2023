@@ -37,7 +37,8 @@ namespace Portfolio.Controllers
             var portfolio = new StudyModel()
             {
                 Title = temp.Title,
-                Url = temp.Url
+                Url = temp.Url,
+                CreatedAt = DateTime.Now // 현재 시각 추가
             };
 
             _db.Study.Add(portfolio);

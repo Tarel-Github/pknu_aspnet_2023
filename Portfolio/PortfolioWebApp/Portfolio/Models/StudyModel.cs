@@ -19,6 +19,6 @@ namespace Portfolio.Models
 
 
         [DisplayName("현재 시각")]
-        public DateTime CurrentTime { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
