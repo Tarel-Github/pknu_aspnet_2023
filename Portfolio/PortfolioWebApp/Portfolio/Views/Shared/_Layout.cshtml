@@ -176,11 +176,12 @@
                         <span class="menu-icon">
                             <i class="mdi mdi-book-open-page-variant"></i>
                         </span>
-                        <span class="menu-title">스터디</span>
+                        <span class="menu-title">자기개발 내역</span>
                     </a>
                 </li>
 
                 <!-- 좌측 메뉴 4, 최초 옵션은 Tables -->
+                <!--
                 <li class="nav-item menu-items">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Service">
                         <span class="menu-icon">
@@ -189,6 +190,7 @@
                         <span class="menu-title">서비스</span>
                     </a>
                 </li>
+                -->
 
                 <!-- 좌측 메뉴 5, 최초 옵션은 Charts -->
                 <li class="nav-item menu-items">
@@ -269,7 +271,7 @@
                         {
                         <!-- 상단의 프로젝트 생성 버튼, 하단 메뉴 있음 -->
                         <li class="nav-item dropdown d-none d-lg-block">
-                            <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ 새로운 프로젝트 추가</a>
+                            <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ 새로운 포트폴리오 추가</a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
                                 <h6 class="p-3 mb-0">프로젝트</h6>
                                 <div class="dropdown-divider"></div>
@@ -279,9 +281,17 @@
                                             <i class="mdi mdi-file-outline text-primary"></i>
                                         </div>
                                     </div>
+
+
+
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">소프트웨어 개발</p>
+                                        <p class="preview-subject ellipsis mb-1" onclick="redirectToPortfolioWeb()">웹 포트폴리오 추가</p>
                                     </div>
+                                    <script>
+                                        function redirectToPortfolioWeb() {
+                                            window.location.href = '@Url.Action("Create", "PortfolioWeb")';
+                                        }
+                                    </script>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
@@ -291,8 +301,13 @@
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">UI 개발</p>
+                                        <p class="preview-subject ellipsis mb-1" onclick="redirectToPortfolioApp()">앱 포트폴리오 추가</p>
                                     </div>
+                                    <script>
+                                        function redirectToPortfolioApp() {
+                                            window.location.href = '@Url.Action("Create", "PortfolioApp")';
+                                        }
+                                    </script>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item preview-item">
@@ -302,11 +317,16 @@
                                         </div>
                                     </div>
                                     <div class="preview-item-content">
-                                        <p class="preview-subject ellipsis mb-1">소프트웨어 점검</p>
+                                        <p class="preview-subject ellipsis mb-1" onclick="redirectToStudy()">연구내역 추가</p>
                                     </div>
+                                    <script>
+                                        function redirectToStudy() {
+                                            window.location.href = '@Url.Action("Create", "Study")';
+                                        }
+                                    </script>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <p class="p-3 mb-0 text-center">최하단 멘트</p>
+                                <p class="p-3 mb-0 text-center"></p>
                             </div>
                         </li>
                         <!-- 상단 오른쪽 박스 4개 짜리 아이콘 (용도 불명) -->
