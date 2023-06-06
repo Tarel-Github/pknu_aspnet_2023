@@ -33,32 +33,23 @@ namespace Portfolio.Controllers
         [HttpPost]
         public IActionResult Create(TempPortfolioWebModel temp)
         {
-            Debug.WriteLine("이부분 통과");
+            // 파일업로드 함수로 이동
+            string upFileName = UploadImageFile(temp);
 
-            //if (ModelState.IsValid)
-            //{
-                Debug.WriteLine("이부분 통과1");
+            var model = new PortfolioWebModel()
+            {
+                Title = temp.Title,
+                Url = temp.Url,
+                CreatedAt = DateTime.Now,
+                FileName = upFileName   // 이게 핵심
+            };
 
-                // 파일업로드 함수로 이동
-                string upFileName = UploadImageFile(temp);
+            _db.PortfolioWeb.Add(model);
+            _db.SaveChanges();
 
-                var model = new PortfolioWebModel()
-                {
-                    Title = temp.Title,
-                    Url = temp.Url,
-                    CreatedAt = DateTime.Now,
-                    FileName = upFileName   // 이게 핵심
-                };
+            TempData["succeed"] = "포트폴리오 저장완료!";
 
-                _db.PortfolioWeb.Add(model);
-                _db.SaveChanges();
-
-                TempData["succeed"] = "포트폴리오 저장완료!";
-                Debug.WriteLine("이부분 통과223123");
-
-                return RedirectToAction("Index", "PortfolioWeb");
-            //}
-            //return View(temp);
+            return RedirectToAction("Index", "PortfolioWeb");
         }
 
         // 라우팅이나 Get/Post랑 관계없음

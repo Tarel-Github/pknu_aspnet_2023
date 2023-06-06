@@ -43,7 +43,7 @@ namespace Portfolio.Controllers
             _db.SaveChanges();
 
             TempData["succeed"] = "공지사항 저장완료!";
-            return RedirectToAction("Announcement", "Home");
+            return RedirectToAction("Index", "Announcement");
 
         }
     }

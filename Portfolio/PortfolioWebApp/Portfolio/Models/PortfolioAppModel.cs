@@ -21,7 +21,7 @@ namespace Portfolio.Models
 
 
         [DisplayName("작성일")]
-        public DateTime PostDate { get; set; }
+        public DateTime CreatedAt { get; set; }
 
 
         [DisplayName("파일명")]
@@ -45,13 +45,13 @@ namespace Portfolio.Models
         [DisplayName("깃허브 주소")]
         public string Url { get; set; }
 
+        [DisplayName("작성일")]
+        public DateTime CreatedAt { get; set; }
+
         [NotMapped]
         [DisplayName("파일명(585 x 400) 권장")]    // 실제 이미지를 받아서 저장하기 위한 중간단계 객체!
         public IFormFile? PortfolioImage { get; set; }
 
-
-        [DisplayName("작성일")]
-        public DateTime CreatedAt { get; set; }
 
         [DisplayName("파일명")]
         [FileExtensions(Extensions = ".png,.jpg,.jpeg", ErrorMessage = "이미지 파일을 선택하세요.")]

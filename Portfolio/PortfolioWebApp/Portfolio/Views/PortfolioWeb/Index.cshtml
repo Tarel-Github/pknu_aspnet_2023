@@ -24,7 +24,51 @@
                             <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
                             <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel owl-loaded owl-drag" id="owl-carousel-basic">
                                 <div class="owl-stage-outer">
-                                    <!-- 여기에 사진을 올려야 할 듯-->
+                                    <!-- 사진-->
+
+
+                                    @if (Model.Count() > 0)
+                                        {
+
+                                        @Html.Raw("<div class='item'>")
+
+
+                                            if (item.FileName == "")
+                                            {
+                                                @Html.Raw("<div class='portfolio-item'>" +
+                                                            "  <div class='thumb'>" +
+                                                           $"    <img src='/default/noImg.jpg' width='445' height='305'>" +
+                                                            "    <div class='hover-content'>" +
+                                                            "      <div class='inner-content'>" +
+                                                           $"        <a href='{item.Url}' target='_blank'><h4>{item.Title}</h4></a>" +
+                                                            "      </div>" +
+                                                            "    </div>" +
+                                                            "  </div>" +
+                                                            "</div>" +
+                                                            "</div>")
+
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("<div class='portfolio-item'>" +
+                                                            "  <div class='thumb'>" +
+                                                           $"    <img src='/uploads/{item.FileName}' width='445' height='305'>" +
+                                                            "    <div class='hover-content'>" +
+                                                            "      <div class='inner-content'>" +
+                                                           $"        <a href='{item.Url}' target='_blank'><h4>{item.Title}</h4></a>" +
+                                                            "      </div>" +
+                                                            "    </div>" +
+                                                            "  </div>" +
+                                                            "</div>" +
+                                                            "</div>")
+                                            }
+
+
+                                            
+                                        }
+
+
+
                                 </div>
                             </div>
                             <div class="d-flex py-4">
