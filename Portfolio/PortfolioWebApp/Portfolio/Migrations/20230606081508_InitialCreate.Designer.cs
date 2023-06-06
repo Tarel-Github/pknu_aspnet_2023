@@ -11,7 +11,7 @@ using Portfolio.Data;
 namespace Portfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230606040721_InitialCreate")]
+    [Migration("20230606081508_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -272,11 +272,15 @@ namespace Portfolio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("FileName")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -328,6 +332,10 @@ namespace Portfolio.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FileName")
                         .HasColumnType("longtext");

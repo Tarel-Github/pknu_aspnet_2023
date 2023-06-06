@@ -32,6 +32,12 @@
                     </div>
 
                     <div class="form-group">
+                        <label asp-for="Detail" class="control-label"></label>
+                        <input asp-for="Detail" class="form-control" />
+                        <span asp-validation-for="Detail" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <label>파일 업로드</label>
                         <div class="input-group col-xs-12">
                           <input asp-for="PortfolioImage" class="form-control" type="file" accept=".png, .jpg, .jpeg" />

@@ -269,11 +269,15 @@ namespace Portfolio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("FileName")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("FileName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -325,6 +329,10 @@ namespace Portfolio.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Detail")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FileName")
                         .HasColumnType("longtext");

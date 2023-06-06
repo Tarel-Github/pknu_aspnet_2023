@@ -40,6 +40,7 @@ namespace Portfolio.Controllers
             {
                 Title = temp.Title,
                 Url = temp.Url,
+                Detail = temp.Detail,
                 CreatedAt = DateTime.Now,
                 FileName = upFileName   // 이게 핵심
             };

@@ -19,6 +19,11 @@ namespace Portfolio.Models
         [DisplayName("깃허브 주소")]
         public string Url { get; set; }
 
+        [Required(ErrorMessage = "내용은 필수입니다..")]
+        [DisplayName("내용")]
+        public string Detail { get; set; }
+
+
         [DisplayName("작성일")]
         public DateTime CreatedAt { get; set; }
 
@@ -42,6 +47,10 @@ namespace Portfolio.Models
         [Required(ErrorMessage = "깃허브 주소는 필수입니다..")]
         [DisplayName("깃허브 주소")]
         public string Url { get; set; }
+
+        [Required(ErrorMessage = "내용은 필수입니다..")]
+        [DisplayName("내용")]
+        public string Detail { get; set; }
 
         [DisplayName("작성일")]
         public DateTime CreatedAt { get; set; }
